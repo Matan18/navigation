@@ -7,7 +7,7 @@ Só pra simular coloquei minha foto como perfil e um post usando praticamente as
 
 Ao apertar o Switch, ele vai trocar de logado para deslogado e vice e versa.
 
-![]('/gifs/authRoutes.gif)
+![](../gifs/authRoutes.gif)
 
 É necessário usar o createContext e o useContext do React, primeiro, vamos criar o contexto para que toda a aplicação tenha acesso as informações necessárias.
 
