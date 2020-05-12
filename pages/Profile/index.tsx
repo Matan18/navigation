@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
-import { PropsProfile } from "../../routes";
+import { PropsProfile } from "../../contexts/routes";
 
 
 // import { Container } from './styles';
