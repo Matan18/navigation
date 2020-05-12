@@ -6,7 +6,7 @@ Eu queria aprender mais sobre como usar o React-Navigation, para poder mandar in
 
 
 
-![](/gifs/untitled.webm)
+![](/gifs/untitled.gif)
 
 ## Stack Navigation
 
