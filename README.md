@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
 
 E para cada pagina vocêr quer 'empilhar' você vai precisar usar o Element Screen na instancia do Stack Navigator, você precisa envolver os Screens com Stack.Navigator como Element, e o Stack.Navigator precisa estar dentro de um NavigatorContainer (from @react-navigation/native)
 
-``` 
+```javascript
 <NavigationContainer>
     <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
@@ -37,7 +37,7 @@ Eu acredito que no JavaScript é mais simples (foi usado na [semana OmniStack 11
 
 Na [documentação do React Navigation com TypeScript](https://reactnavigation.org/docs/typescript/) eles dizem para cria um Objeto com os tipos que você vai usar, eu nomeei como RootStackParamList:
 
-``` 
+```javascript
 type RootStackParamList = {
     Home: { name: string };
     Profile: { name: string } | undefined;
@@ -52,7 +52,7 @@ Esse exemplo é:
 
 Para cada pagina no RootStackParamList, eu creiei o StackNavigationProp, RouteProp e Props, usando as próximas linhas
 
-``` 
+```javascript
 type NamePageScreenNavigationProp= StackNavigationProp<RootStackParamList, 'NamePage'>
 type NamePageSreenRouteProps= RouteProp<RootStackParamList, 'NamePage'>
 export type PropsNamePage={
@@ -79,7 +79,7 @@ function Home ({navigation, route }) => {
 
 Esse é mais fácil, você vai instanciar o createBottomTabNavigator():
 
-``` 
+```javascript
 ...
 const Tab = createBottomTabNavigator();
 ...
@@ -87,7 +87,7 @@ const Tab = createBottomTabNavigator();
 
 E como o Stack, você vai colocar as paginas numa Screen, a Screen numa Tab.Navigator, o Tab.Navigator no NavigationContainer:
 
-``` 
+```javascript
 ...
 <NavigationContainer>
     <Tab.Navigator initialRouteName={ `Page${route.params?.number}` }>
@@ -101,7 +101,7 @@ E como o Stack, você vai colocar as paginas numa Screen, a Screen numa Tab.Navi
 Se você quer combinar o Stack e Tab navigations, você vai colocar o Tab navigation como uma Screen dentro do Stack.Navigator:
 
 
-```
+```javascript
 ...
 <Stack.Navigator>
     <Stack.Screen name="Home" component={Home} />
@@ -123,13 +123,13 @@ First off all, I create the pages folder, so I used the Stack Navigation between
 
 To use Stack Navigation you will need instantiate createStackNavigator() from @react-navigation/stack:
 
-``` 
+```javascript
 const Stack = createStackNavigator();
 ```
 
 And for each page you want to 'stack' you will use the Element Screen for your Stack Navigator instance, you need to wrap the Screens inside a Stack.Navigator, and the Stack.Navigator needs to be inside a NavigatorContainer (from @react-navigation/native)
 
-``` 
+```javascript
 <NavigationContainer>
     <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
@@ -146,7 +146,7 @@ I believe that JavaScript is simpler (it was used in [OmniStack Week 11](https:/
 
 In the [React Navigation with TypeScript documentation](https://reactnavigation.org/docs/typescript/) they say to create an Object with the types you are going to use, I named it RootStackParamList
 
-``` 
+```javascript
 type RootStackParamList = {
     Home: { name: string };
     Profile: { name: string } | undefined;
@@ -161,7 +161,7 @@ This example is:
 
 For each page in RootStackParamList, I created StackNavigationProp, RouteProp and Props, using the next lines:
 
-``` 
+```javascript
 type NamePageScreenNavigationProp= StackNavigationProp<RootStackParamList, 'NamePage'>
 type NamePageSreenRouteProps= RouteProp<RootStackParamList, 'NamePage'>
 export type PropsNamePage={
@@ -174,7 +174,7 @@ I use export so that I can take these properties and use them on pages using imp
 The route: I will find the information, using "route.params.name" for example;
 The navigation: I will use it to navigate through the pages using navigation.navigate
 
-``` 
+```javascript
 function Home ({navigation, route }) => {
   const[name, setName]=useState(route.params.name)
   function navigateToProfile() {
@@ -188,7 +188,7 @@ function Home ({navigation, route }) => {
 
 This is easier, you will instantiate createBottomTabNavigator():
 
-``` 
+```javascript
 ...
 const Tab = createBottomTabNavigator();
 ...
@@ -196,7 +196,7 @@ const Tab = createBottomTabNavigator();
 
 And like Stack, you will place pages on a Screen, Screen on a Tab.Navigator, Tab.Navigator on NavigationContainer:
 
-``` 
+```javascript
 ...
 <NavigationContainer>
     <Tab.Navigator initialRouteName={ `Page${route.params?.number}` }>
@@ -209,7 +209,7 @@ And like Stack, you will place pages on a Screen, Screen on a Tab.Navigator, Tab
 
 If you want to combine Stack and Tab navigations, you will place Tab navigation as a Screen within Stack.Navigator:
 
-```
+```javascript
 ...
 <Stack.Navigator>
     <Stack.Screen name="Home" component={Home} />
@@ -233,7 +233,7 @@ Ao apertar o Switch, ele vai trocar de logado para deslogado e vice e versa.
 
 No TypeScript, vamos primeiro definir quais são as informações que a aplicação vai ter acesso:
 
-```
+```javascript
 interface AuthContextData {
     signed: boolean
     signIn: ()=>void
@@ -242,7 +242,7 @@ interface AuthContextData {
 
 E usar essa interface como tipagem para o createContext (vale lembrar que não é necessário que haja apenas 1 contexto, dependendo da aplicação vai ser necessário mais de um, para informações diferentes)
 
-```
+```javascript
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export default AuthContext;
 ```
@@ -251,7 +251,7 @@ Eu faço a exportação do context para poder usar nas rotas da aplicação
 Criei então um elemento utilizando o Provider desse Context, passando como valores, a função de login, e o estado da aplicação (logado ou não)
 
 
-```
+```javascript
 export const AuthProvider: React.FC = ({ children }) => {
     const [signed, setSigned]=useState(Boolean)
     function signIn(){
@@ -265,7 +265,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 O segredo está aqui, ao invés de colocar dentro do Navigation Container as rotas diretamente, vou colocar o AuthProvider que acabamos de criar, e dentro desse AuthProvider, vou criar um novo elemento que chamei de Navigators:
 
-```
+```javascript
 export default function routes() {
     return (
         <NavigationContainer>
@@ -280,7 +280,7 @@ export default function routes() {
 Esse Navigators é um elemento que vai utilizar o context, e avaliar qual grupo de páginas vai estar sendo utilizado no momento.
 
 
-```
+```javascript
 const Navigators: React.FC = () => {
     const { signed } = useContext(AuthContext)
     return (
@@ -331,7 +331,7 @@ It is necessary to use React's createContext and useContext, first, let's create
 
 In TypeScript, let's first define what information the application will have access to:
 
-```
+```javascript
 interface AuthContextData {
     signed: boolean
     signIn: ()=>void
@@ -340,7 +340,7 @@ interface AuthContextData {
 
 And use this interface as a typing for createContext (remember that it is not necessary to have only 1 context, depending on the application, more than one will be needed, for different information)
 
-```
+```javascript
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export default AuthContext;
 ```
@@ -349,7 +349,7 @@ I export the context to be able to use it in the application routes
 
 Then I created an element using the Provider of this Context, passing as values, the login function, and the application status (logged in or not)
 
-```
+```javascript
 export const AuthProvider: React.FC = ({ children }) => {
     const [signed, setSigned]=useState(Boolean)
     function signIn(){
@@ -363,7 +363,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 The secret is here, instead of placing the routes directly into the Navigation Container, I will place the AuthProvider that we just created, and within that AuthProvider, I will create a new element that I called Navigators:
 
-```
+```javascript
 export default function routes() {
     return (
         <NavigationContainer>
@@ -379,7 +379,7 @@ export default function routes() {
 This Navigators is an element that will use the context, and evaluate which group of pages will be used at the moment.
 
 
-```
+```javascript
 const Navigators: React.FC = () => {
     const { signed } = useContext(AuthContext)
     return (
