@@ -13,7 +13,7 @@ Ao apertar o Switch, ele vai trocar de logado para deslogado e vice e versa.
 
 No TypeScript, vamos primeiro definir quais são as informações que a aplicação vai ter acesso:
 
-```
+```javascript
 interface AuthContextData {
     signed: boolean
     signIn: ()=>void
@@ -22,7 +22,7 @@ interface AuthContextData {
 
 E usar essa interface como tipagem para o createContext (vale lembrar que não é necessário que haja apenas 1 contexto, dependendo da aplicação vai ser necessário mais de um, para informações diferentes)
 
-```
+```javascript
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export default AuthContext;
 ```
@@ -31,7 +31,7 @@ Eu faço a exportação do context para poder usar nas rotas da aplicação
 Criei então um elemento utilizando o Provider desse Context, passando como valores, a função de login, e o estado da aplicação (logado ou não)
 
 
-```
+```javascript
 export const AuthProvider: React.FC = ({ children }) => {
     const [signed, setSigned]=useState(Boolean)
     function signIn(){
@@ -45,7 +45,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 O segredo está aqui, ao invés de colocar dentro do Navigation Container as rotas diretamente, vou colocar o AuthProvider que acabamos de criar, e dentro desse AuthProvider, vou criar um novo elemento que chamei de Navigators:
 
-```
+```javascript
 export default function routes() {
     return (
         <NavigationContainer>
@@ -60,7 +60,7 @@ export default function routes() {
 Esse Navigators é um elemento que vai utilizar o context, e avaliar qual grupo de páginas vai estar sendo utilizado no momento.
 
 
-```
+```javascript
 const Navigators: React.FC = () => {
     const { signed } = useContext(AuthContext)
     return (
@@ -111,7 +111,7 @@ It is necessary to use React's createContext and useContext, first, let's create
 
 In TypeScript, let's first define what information the application will have access to:
 
-```
+```javascript
 interface AuthContextData {
     signed: boolean
     signIn: ()=>void
@@ -120,7 +120,7 @@ interface AuthContextData {
 
 And use this interface as a typing for createContext (remember that it is not necessary to have only 1 context, depending on the application, more than one will be needed, for different information)
 
-```
+```javascript
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export default AuthContext;
 ```
@@ -129,7 +129,7 @@ I export the context to be able to use it in the application routes
 
 Then I created an element using the Provider of this Context, passing as values, the login function, and the application status (logged in or not)
 
-```
+```javascript
 export const AuthProvider: React.FC = ({ children }) => {
     const [signed, setSigned]=useState(Boolean)
     function signIn(){
@@ -143,7 +143,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 The secret is here, instead of placing the routes directly into the Navigation Container, I will place the AuthProvider that we just created, and within that AuthProvider, I will create a new element that I called Navigators:
 
-```
+```javascript
 export default function routes() {
     return (
         <NavigationContainer>
@@ -159,7 +159,7 @@ export default function routes() {
 This Navigators is an element that will use the context, and evaluate which group of pages will be used at the moment.
 
 
-```
+```javascript
 const Navigators: React.FC = () => {
     const { signed } = useContext(AuthContext)
     return (
